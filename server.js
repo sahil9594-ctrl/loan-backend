@@ -6,15 +6,11 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 const db = require("./db");
-const fs = require("fs");
 
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
-}
 console.log("🔥 APPLY LOAN SERVER VERSION 2 LOADED");
 
 
-// 2️⃣ APP SETUP
+// 2️⃣ APP SETUP  
 const app = express();
 
 app.use(cors());
@@ -30,6 +26,11 @@ db.connect(err => {
 });
 
 // 4️⃣ FILE UPLOAD CONFIG
+const fs = require("fs");
+
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) =>
