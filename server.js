@@ -6,6 +6,11 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 const db = require("./db");
+const fs = require("fs");
+
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 console.log("🔥 APPLY LOAN SERVER VERSION 2 LOADED");
 
 
@@ -319,8 +324,7 @@ app.post("/basic-details", (req, res) => {
 // SAVE BANK DETAILS
 app.post("/bank-details", (req, res) => {
 
-  const user_id = parseInt(req.body.user_id);
-  const { bank_name, branch, account_number, ifsc } = req.body;
+  const { user_id, bank_name, branch, account_number, ifsc } = req.body;
 
   const sql = `
     INSERT INTO bank_details 
