@@ -319,7 +319,8 @@ app.post("/basic-details", (req, res) => {
 // SAVE BANK DETAILS
 app.post("/bank-details", (req, res) => {
 
-  const { user_id, bank_name, branch, account_number, ifsc } = req.body;
+  const user_id = parseInt(req.body.user_id);
+  const { bank_name, branch, account_number, ifsc } = req.body;
 
   const sql = `
     INSERT INTO bank_details 
